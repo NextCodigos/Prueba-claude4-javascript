@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejemplos de Nuevas Características de JavaScript</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Fuente Inter */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Estilos para el contenedor de salida */
+        .output-container {
+            background-color: #1f2937; /* bg-gray-800 */
+            color: #d1d5db; /* text-gray-300 */
+            padding: 1rem;
+            border-radius: 0.5rem; /* rounded-lg */
+            margin-top: 0.5rem;
+            white-space: pre-wrap; /* Para mantener el formato de nueva línea */
+            max-height: 200px; /* Limitar altura para evitar desbordamiento */
+            overflow-y: auto; /* Habilitar desplazamiento si el contenido es demasiado largo */
+            font-size: 0.875rem; /* text-sm */
+        }
+        .code-block {
+            background-color: #e0e7ff; /* bg-indigo-100 */
+            color: #1e3a8a; /* text-blue-900 */
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
+            font-family: monospace;
+            white-space: pre-wrap;
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-900 p-6">
+    <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-xl p-8">
+        <h1 class="text-4xl font-bold text-center text-blue-700 mb-8">
+            Ejemplos de Nuevas Características de JavaScript
+        </h1>
+
+        <div class="mb-10 p-6 bg-blue-50 rounded-lg shadow-md">
+            <h2 class="text-3xl font-semibold text-blue-800 mb-4">
+                1. `Object.groupBy()`
+            </h2>
+            <p class="mb-4 text-gray-700">
+                El método estático <code>Object.groupBy()</code> agrupa los elementos de un iterable (por ejemplo, un array) en un objeto usando la clave devuelta por una función de devolución de llamada.
+            </p>
+
+            <div class="mb-6">
+                <h3 class="text-xl font-medium text-blue-700 mb-2">
+                    Ejemplo 1: Agrupar números en pares e impares
+                </h3>
+                <div class="code-block">
+                    <pre>
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const groupedNumbers = Object.groupBy(numbers, (num, index) => {
+    return num % 2 === 0 ? 'pares' : 'impares';
+});
+console.log('Números agrupados (pares/impares):', groupedNumbers);
+document.getElementById('output-groupBy-1').textContent = JSON.stringify(groupedNumbers, null, 2);</pre>
+                </div>
+                <button onclick="runGroupByExample1()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out">
+                    Ejecutar Ejemplo 1
+                </button>
+                <div id="output-groupBy-1" class="output-container"></div>
+            </div>
+
+            <div class="mb-6">
+                <h3 class="text-xl font-medium text-blue-700 mb-2">
+                    Ejemplo 2: Agrupar Avengers por planeta
+                </h3>
+                <div class="code-block">
+                    <pre>
+const avengers = [
+    { name: 'Iron Man', planet: 'Tierra' },
+    { name: 'Thor', planet: 'Asgard' },
+    { name: 'Captain America', planet: 'Tierra' },
+    { name: 'Hulk', planet: 'Tierra' },
+    { name: 'Black Widow', planet: 'Tierra' },
+    { name: 'Loki', planet: 'Asgard' },
+];
+const groupedAvengersByPlanet = Object.groupBy(avengers, (avenger) => avenger.planet);
+console.log('Avengers agrupados por planeta:', groupedAvengersByPlanet);
+document.getElementById('output-groupBy-2').textContent = JSON.stringify(groupedAvengersByPlanet, null, 2);</pre>
+                </div>
+                <button onclick="runGroupByExample2()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out">
+                    Ejecutar Ejemplo 2
+                </button>
+                <div id="output-groupBy-2" class="output-container"></div>
+            </div>
+
+            <div class="mb-6">
+                <h3 class="text-xl font-medium text-blue-700 mb-2">
+                    Ejemplo 3: Agrupar Avengers por origen (Terrícola/Extraterrestre)
+                </h3>
+                <div class="code-block">
+                    <pre>
+const groupedAvengersByOrigin = Object.groupBy(avengers, (avenger) => {
+    return avenger.planet === 'Tierra' ? 'Terrícola' : 'Extraterrestre';
+});
+console.log('Avengers agrupados por origen:', groupedAvengersByOrigin);
+document.getElementById('output-groupBy-3').textContent = JSON.stringify(groupedAvengersByOrigin, null, 2);</pre>
+                </div>
+                <button onclick="runGroupByExample3()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out">
+                    Ejecutar Ejemplo 3
+                </button>
+                <div id="output-groupBy-3" class="output-container"></div>
+            </div>
+
+            <div class="mb-6">
+                <h3 class="text-xl font-medium text-blue-700 mb-2">
+                    Ejemplo 4: Agrupar Avengers por estado "Alive"
+                </h3>
+                <div class="code-block">
+                    <pre>
+const avengersWithStatus = [
+    { name: 'Iron Man', alive: false },
+    { name: 'Thor', alive: true },
+    { name: 'Captain America', alive: true },
+    { name: 'Black Widow', alive: false },
+];
+const groupedAvengersByStatus = Object.groupBy(avengersWithStatus, (avenger) => avenger.alive);
+console.log('Avengers agrupados por estado (Alive):', groupedAvengersByStatus);
+document.getElementById('output-groupBy-4').textContent = JSON.stringify(groupedAvengersByStatus, null, 2);</pre>
+                </div>
+                <button onclick="runGroupByExample4()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out">
+                    Ejecutar Ejemplo 4
+                </button>
+                <div id="output-groupBy-4" class="output-container"></div>
+            </div>
+
+            <div class="mb-6">
+                <h3 class="text-xl font-medium text-blue-700 mb-2">
+                    Ejemplo 5: Agrupar Avengers por nivel de poder usando Symbols
+                </h3>
+                <div class="code-block">
+                    <pre>
+const humanLevelPower = Symbol('human');
+const superHumanLevelPower = Symbol('superhuman');
+const godLevelPower = Symbol('god');
+
+const avengersByPower = [
+    { name: 'Iron Man', powerLevel: humanLevelPower },
+    { name: 'Thor', powerLevel: godLevelPower },
+    { name: 'Captain America', powerLevel: humanLevelPower },
+    { name: 'Hulk', powerLevel: superHumanLevelPower },
+    { name: 'Vision', powerLevel: godLevelPower },
+];
+
+const groupedAvengersByPower = Object.groupBy(avengersByPower, (avenger) => avenger.powerLevel);
+console.log('Avengers agrupados por nivel de poder (Symbols):', groupedAvengersByPower);
+// Nota: Los Symbols no se serializan bien a JSON por defecto.
+document.getElementById('output-groupBy-5').textContent = 'Ver consola para este ejemplo debido a los Symbols.';</pre>
+                </div>
+                <button onclick="runGroupByExample5()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out">
+                    Ejecutar Ejemplo 5
+                </button>
+                <div id="output-groupBy-5" class="output-container"></div>
+            </div>
+
+            <div class="mb-6">
+                <h3 class="text-xl font-medium text-blue-700 mb-2">
+                    Ejemplo 6: `Object.groupBy()` con un Set
+                </h3>
+                <div class="code-block">
+                    <pre>
+const dcHeroes = new Set([
+    { name: 'Superman', power: 'super' },
+    { name: 'Batman', power: 'human' },
+    { name: 'Wonder Woman', power: 'super' },
+    { name: 'Flash', power: 'super' },
+    { name: 'Green Arrow', power: 'human' },
+]);
+const groupedDCHeroes = Object.groupBy(dcHeroes, (hero) => hero.power);
+console.log('Héroes de DC agrupados por poder:', groupedDCHeroes);
+document.getElementById('output-groupBy-6').textContent = JSON.stringify(groupedDCHeroes, null, 2);</pre>
+                </div>
+                <button onclick="runGroupByExample6()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out">
+                    Ejecutar Ejemplo 6
+                </button>
+                <div id="output-groupBy-6" class="output-container"></div>
+            </div>
+        </div>
+
+        <div class="mb-10 p-6 bg-green-50 rounded-lg shadow-md">
+            <h2 class="text-3xl font-semibold text-green-800 mb-4">
+                2. `Map.groupBy()`
+            </h2>
+            <p class="mb-4 text-gray-700">
+                Similar a <code>Object.groupBy()</code>, pero devuelve un <code>Map</code> en lugar de un objeto, lo que permite usar cualquier tipo de valor como clave (incluidos objetos y Symbols).
+            </p>
+
+            <div class="mb-6">
+                <h3 class="text-xl font-medium text-green-700 mb-2">
+                    Ejemplo 1: Agrupar Avengers por planeta (devuelve un Map)
+                </h3>
+                <div class="code-block">
+                    <pre>
+const avengersForMap = [
+    { name: 'Iron Man', planet: 'Tierra' },
+    { name: 'Thor', planet: 'Asgard' },
+    { name: 'Captain America', planet: 'Tierra' },
+    { name: 'Hulk', planet: 'Tierra' },
+    { name: 'Black Widow', planet: 'Tierra' },
+    { name: 'Loki', planet: 'Asgard' },
+];
+const groupedAvengersByPlanetMap = Map.groupBy(avengersForMap, (avenger) => avenger.planet);
+console.log('Avengers agrupados por planeta (Map):', groupedAvengersByPlanetMap);
+// Para mostrar un Map en HTML, necesitamos convertirlo a un objeto o array
+const mapAsObject = Object.fromEntries(groupedAvengersByPlanetMap);
+document.getElementById('output-mapGroupBy-1').textContent = JSON.stringify(mapAsObject, null, 2);</pre>
+                </div>
+                <button onclick="runMapGroupByExample1()" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out">
+                    Ejecutar Ejemplo 1
+                </button>
+                <div id="output-mapGroupBy-1" class="output-container"></div>
+            </div>
+        </div>
+
+        <div class="mb-10 p-6 bg-yellow-50 rounded-lg shadow-md">
+            <h2 class="text-3xl font-semibold text-yellow-800 mb-4">
+                3. `Array.prototype.at()`
+            </h2>
+            <p class="mb-4 text-gray-700">
+                El método <code>at()</code> toma un valor entero y devuelve el elemento en ese índice, permitiendo índices positivos y negativos. Los enteros negativos cuentan hacia atrás desde el último elemento del array.
+            </p>
+
+            <div class="mb-6">
+                <h3 class="text-xl font-medium text-yellow-700 mb-2">
+                    Ejemplo 1: Acceder a elementos con índices positivos
+                </h3>
+                <div class="code-block">
+                    <pre>
+const numbers = [10, 20, 30, 40, 50];
+const elementAtIndex2 = numbers.at(2); // 30
+console.log('Elemento en el índice 2:', elementAtIndex2);
+document.getElementById('output-at-1').textContent = `Elemento en el índice 2: ${elementAtIndex2}`;</pre>
+                </div>
+                <button onclick="runAtExample1()" class="bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out">
+                    Ejecutar Ejemplo 1
+                </button>
+                <div id="output-at-1" class="output-container"></div>
+            </div>
+
+            <div class="mb-6">
+                <h3 class="text-xl font-medium text-yellow-700 mb-2">
+                    Ejemplo 2: Acceder al último elemento con índice negativo
+                </h3>
+                <div class="code-block">
+                    <pre>
+const lastElement = numbers.at(-1); // 50
+console.log('Último elemento:', lastElement);
+document.getElementById('output-at-2').textContent = `Último elemento: ${lastElement}`;</pre>
+                </div>
+                <button onclick="runAtExample2()" class="bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out">
+                    Ejecutar Ejemplo 2
+                </button>
+                <div id="output-at-2" class="output-container"></div>
+            </div>
+
+            <div class="mb-6">
+                <h3 class="text-xl font-medium text-yellow-700 mb-2">
+                    Ejemplo 3: Acceder al penúltimo elemento con índice negativo
+                </h3>
+                <div class="code-block">
+                    <pre>
+const secondLastElement = numbers.at(-2); // 40
+console.log('Penúltimo elemento:', secondLastElement);
+document.getElementById('output-at-3').textContent = `Penúltimo elemento: ${secondLastElement}`;</pre>
+                </div>
+                <button onclick="runAtExample3()" class="bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out">
+                    Ejecutar Ejemplo 3
+                </button>
+                <div id="output-at-3" class="output-container"></div>
+            </div>
+        </div>
+
+        <div class="mb-10 p-6 bg-purple-50 rounded-lg shadow-md">
+            <h2 class="text-3xl font-semibold text-purple-800 mb-4">
+                4. `Array.prototype.toReversed()`
+            </h2>
+            <p class="mb-4 text-gray-700">
+                El método <code>toReversed()</code> es la contraparte no mutante de <code>reverse()</code>. Devuelve un nuevo array con los elementos en orden inverso.
+            </p>
+
+            <div class="mb-6">
+                <h3 class="text-xl font-medium text-purple-700 mb-2">
+                    Ejemplo 1: Invertir un array sin modificar el original
+                </h3>
+                <div class="code-block">
+                    <pre>
+const originalArray = [1, 2, 3, 4, 5];
+const reversedArray = originalArray.toReversed();
+console.log('Array original:', originalArray);
+console.log('Array invertido (nuevo):', reversedArray);
+document.getElementById('output-toReversed-1').textContent = `Original: ${originalArray}\nInvertido: ${reversedArray}`;</pre>
+                </div>
+                <button onclick="runToReversedExample1()" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out">
+                    Ejecutar Ejemplo 1
+                </button>
+                <div id="output-toReversed-1" class="output-container"></div>
+            </div>
+
+            <div class="mb-6">
+                <h3 class="text-xl font-medium text-purple-700 mb-2">
+                    Ejemplo 2: Demostración de copia superficial con objetos anidados
+                </h3>
+                <div class="code-block">
+                    <pre>
+const users = [
+    { id: 1, name: 'Alice', address: { city: 'NY' } },
+    { id: 2, name: 'Bob', address: { city: 'LA' } },
+];
+const reversedUsers = users.toReversed();
+console.log('Usuarios original:', users);
+console.log('Usuarios invertido (copia superficial):', reversedUsers);
+// Modificar el objeto anidado en la copia invertida
+reversedUsers[0].address.city = 'Chicago';
+console.log('Usuarios original después de modificar copia:', users);
+document.getElementById('output-toReversed-2').textContent = `Original: ${JSON.stringify(users, null, 2)}\nInvertido (copia superficial): ${JSON.stringify(reversedUsers, null, 2)}\n(Ver consola para detalles de mutación)`;</pre>
+                </div>
+                <button onclick="runToReversedExample2()" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out">
+                    Ejecutar Ejemplo 2
+                </button>
+                <div id="output-toReversed-2" class="output-container"></div>
+            </div>
+
+            <div class="mb-6">
+                <h3 class="text-xl font-medium text-purple-700 mb-2">
+                    Ejemplo 3: Uso de `structuredClone()` para una copia profunda
+                </h3>
+                <div class="code-block">
+                    <pre>
+const usersDeep = [
+    { id: 1, name: 'Alice', address: { city: 'NY' } },
+    { id: 2, name: 'Bob', address: { city: 'LA' } },
+];
+const deepClonedUsers = structuredClone(usersDeep);
+const reversedDeepClonedUsers = deepClonedUsers.toReversed();
+console.log('Usuarios original (deep):', usersDeep);
+console.log('Usuarios invertido (copia profunda):', reversedDeepClonedUsers);
+// Modificar el objeto anidado en la copia invertida
+reversedDeepClonedUsers[0].address.city = 'Boston';
+console.log('Usuarios original después de modificar copia profunda:', usersDeep);
+document.getElementById('output-toReversed-3').textContent = `Original: ${JSON.stringify(usersDeep, null, 2)}\nInvertido (copia profunda): ${JSON.stringify(reversedDeepClonedUsers, null, 2)}\n(Ver consola para detalles de no-mutación)`;</pre>
+                </div>
+                <button onclick="runToReversedExample3()" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out">
+                    Ejecutar Ejemplo 3
+                </button>
+                <div id="output-toReversed-3" class="output-container"></div>
+            </div>
+        </div>
+
+        <div class="mb-10 p-6 bg-red-50 rounded-lg shadow-md">
+            <h2 class="text-3xl font-semibold text-red-800 mb-4">
+                5. `Array.prototype.toSorted()`
+            </h2>
+            <p class="mb-4 text-gray-700">
+                El método <code>toSorted()</code> es la contraparte no mutante de <code>sort()</code>. Devuelve un nuevo array con los elementos ordenados.
+            </p>
+
+            <div class="mb-6">
+                <h3 class="text-xl font-medium text-red-700 mb-2">
+                    Ejemplo 1: Ordenación incorrecta sin función de comparación
+                </h3>
+                <div class="code-block">
+                    <pre>
+const numbersToSort = [1, 10, 2, 20, 3];
+const sortedIncorrectly = numbersToSort.toSorted();
+console.log('Original:', numbersToSort);
+console.log('Ordenado incorrectamente (Unicode):', sortedIncorrectly);
+document.getElementById('output-toSorted-1').textContent = `Original: ${numbersToSort}\nOrdenado (incorrecto): ${sortedIncorrectly}`;</pre>
+                </div>
+                <button onclick="runToSortedExample1()" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out">
+                    Ejecutar Ejemplo 1
+                </button>
+                <div id="output-toSorted-1" class="output-container"></div>
+            </div>
+
+            <div class="mb-6">
+                <h3 class="text-xl font-medium text-red-700 mb-2">
+                    Ejemplo 2: Ordenación ascendente de números
+                </h3>
+                <div class="code-block">
+                    <pre>
+const numbersAsc = [1, 10, 2, 20, 3];
+const sortedAsc = numbersAsc.toSorted((a, b) => a - b);
+console.log('Original:', numbersAsc);
+console.log('Ordenado ascendente:', sortedAsc);
+document.getElementById('output-toSorted-2').textContent = `Original: ${numbersAsc}\nOrdenado (ascendente): ${sortedAsc}`;</pre>
+                </div>
+                <button onclick="runToSortedExample2()" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out">
+                    Ejecutar Ejemplo 2
+                </button>
+                <div id="output-toSorted-2" class="output-container"></div>
+            </div>
+
+            <div class="mb-6">
+                <h3 class="text-xl font-medium text-red-700 mb-2">
+                    Ejemplo 3: Ordenación descendente de números
+                </h3>
+                <div class="code-block">
+                    <pre>
+const numbersDesc = [1, 10, 2, 20, 3];
+const sortedDesc = numbersDesc.toSorted((a, b) => b - a);
+console.log('Original:', numbersDesc);
+console.log('Ordenado descendente:', sortedDesc);
+document.getElementById('output-toSorted-3').textContent = `Original: ${numbersDesc}\nOrdenado (descendente): ${sortedDesc}`;</pre>
+                </div>
+                <button onclick="runToSortedExample3()" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out">
+                    Ejecutar Ejemplo 3
+                </button>
+                <div id="output-toSorted-3" class="output-container"></div>
+            </div>
+
+            <div class="mb-6">
+                <h3 class="text-xl font-medium text-red-700 mb-2">
+                    Ejemplo 4: Ordenar array de objetos por propiedad 'age'
+                </h3>
+                <div class="code-block">
+                    <pre>
+const people = [
+    { name: 'John', age: 30 },
+    { name: 'Jane', age: 25 },
+    { name: 'Doe', age: 35 },
+];
+const sortedPeopleAsc = people.toSorted((a, b) => a.age - b.age);
+const sortedPeopleDesc = people.toSorted((a, b) => b.age - a.age);
+console.log('Original:', people);
+console.log('Personas ordenadas por edad (ascendente):', sortedPeopleAsc);
+console.log('Personas ordenadas por edad (descendente):', sortedPeopleDesc);
+document.getElementById('output-toSorted-4').textContent = `Original: ${JSON.stringify(people, null, 2)}\nOrdenado (ascendente): ${JSON.stringify(sortedPeopleAsc, null, 2)}\nOrdenado (descendente): ${JSON.stringify(sortedPeopleDesc, null, 2)}`;</pre>
+                </div>
+                <button onclick="runToSortedExample4()" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out">
+                    Ejecutar Ejemplo 4
+                </button>
+                <div id="output-toSorted-4" class="output-container"></div>
+            </div>
+
+            <div class="mb-6">
+                <h3 class="text-xl font-medium text-red-700 mb-2">
+                    Ejemplo 5: Ordenar array de strings alfabéticamente con `localeCompare()`
+                </h3>
+                <div class="code-block">
+                    <pre>
+const fruits = ['banana', 'apple', 'Orange', 'kiwi'];
+const sortedFruits = fruits.toSorted((a, b) => a.localeCompare(b));
+console.log('Original:', fruits);
+console.log('Frutas ordenadas alfabéticamente:', sortedFruits);
+document.getElementById('output-toSorted-5').textContent = `Original: ${fruits}\nOrdenado (alfabético): ${sortedFruits}`;</pre>
+                </div>
+                <button onclick="runToSortedExample5()" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out">
+                    Ejecutar Ejemplo 5
+                </button>
+                <div id="output-toSorted-5" class="output-container"></div>
+            </div>
+        </div>
+
+        <div class="mb-10 p-6 bg-cyan-50 rounded-lg shadow-md">
+            <h2 class="text-3xl font-semibold text-cyan-800 mb-4">
+                6. `Array.prototype.toSpliced()`
+            </h2>
+            <p class="mb-4 text-gray-700">
+                El método <code>toSpliced()</code> es la contraparte no mutante de <code>splice()</code>. Devuelve un nuevo array con los elementos eliminados y/o añadidos en un índice especificado.
+            </p>
+
+            <div class="mb-6">
+                <h3 class="text-xl font-medium text-cyan-700 mb-2">
+                    Ejemplo 1: Reemplazar un elemento
+                </h3>
+                <div class="code-block">
+                    <pre>
+const originalArr = [1, 2, 3, 4, 5];
+const replacedArr = originalArr.toSpliced(2, 1, 99); // En índice 2, eliminar 1, añadir 99
+console.log('Original:', originalArr);
+console.log('Reemplazado:', replacedArr);
+document.getElementById('output-toSpliced-1').textContent = `Original: ${originalArr}\nReemplazado: ${replacedArr}`;</pre>
+                </div>
+                <button onclick="runToSplicedExample1()" class="bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out">
+                    Ejecutar Ejemplo 1
+                </button>
+                <div id="output-toSpliced-1" class="output-container"></div>
+            </div>
+
+            <div class="mb-6">
+                <h3 class="text-xl font-medium text-cyan-700 mb-2">
+                    Ejemplo 2: Insertar un elemento sin eliminar
+                </h3>
+                <div class="code-block">
+                    <pre>
+const insertArr = [1, 2, 3, 4, 5];
+const insertedArr = insertArr.toSpliced(2, 0, 99); // En índice 2, eliminar 0, añadir 99
+console.log('Original:', insertArr);
+console.log('Insertado:', insertedArr);
+document.getElementById('output-toSpliced-2').textContent = `Original: ${insertArr}\nInsertado: ${insertedArr}`;</pre>
+                </div>
+                <button onclick="runToSplicedExample2()" class="bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out">
+                    Ejecutar Ejemplo 2
+                </button>
+                <div id="output-toSpliced-2" class="output-container"></div>
+            </div>
+
+            <div class="mb-6">
+                <h3 class="text-xl font-medium text-cyan-700 mb-2">
+                    Ejemplo 3: Insertar múltiples elementos
+                </h3>
+                <div class="code-block">
+                    <pre>
+const insertMultipleArr = [1, 2, 3, 4, 5];
+const insertedMultipleArr = insertMultipleArr.toSpliced(2, 0, 99, 100, 101); // En índice 2, eliminar 0, añadir 99, 100, 101
+console.log('Original:', insertMultipleArr);
+console.log('Insertado múltiple:', insertedMultipleArr);
+document.getElementById('output-toSpliced-3').textContent = `Original: ${insertMultipleArr}\nInsertado múltiple: ${insertedMultipleArr}`;</pre>
+                </div>
+                <button onclick="runToSplicedExample3()" class="bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out">
+                    Ejecutar Ejemplo 3
+                </button>
+                <div id="output-toSpliced-3" class="output-container"></div>
+            </div>
+
+            <div class="mb-6">
+                <h3 class="text-xl font-medium text-cyan-700 mb-2">
+                    Ejemplo 4: Eliminar un elemento
+                </h3>
+                <div class="code-block">
+                    <pre>
+const deleteArr = [1, 2, 3, 4, 5];
+const deletedArr = deleteArr.toSpliced(2, 1); // En índice 2, eliminar 1
+console.log('Original:', deleteArr);
+console.log('Eliminado:', deletedArr);
+document.getElementById('output-toSpliced-4').textContent = `Original: ${deleteArr}\nEliminado: ${deletedArr}`;</pre>
+                </div>
+                <button onclick="runToSplicedExample4()" class="bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out">
+                    Ejecutar Ejemplo 4
+                </button>
+                <div id="output-toSpliced-4" class="output-container"></div>
+            </div>
+        </div>
+
+        <div class="mb-10 p-6 bg-pink-50 rounded-lg shadow-md">
+            <h2 class="text-3xl font-semibold text-pink-800 mb-4">
+                7. `Array.prototype.with()`
+            </h2>
+            <p class="mb-4 text-gray-700">
+                El método <code>with()</code> devuelve un nuevo array con el elemento en el índice dado reemplazado por el valor dado. Es una contraparte no mutante de la asignación de índice (<code>arr[index] = value</code>).
+            </p>
+
+            <div class="mb-6">
+                <h3 class="text-xl font-medium text-pink-700 mb-2">
+                    Ejemplo 1: Modificar un elemento en un índice específico
+                </h3>
+                <div class="code-block">
+                    <pre>
+const originalNumbers = [10, 20, 30, 40, 50];
+const newNumbers = originalNumbers.with(2, 99); // Reemplazar el elemento en el índice 2 con 99
+console.log('Original:', originalNumbers);
+console.log('Nuevo array con elemento modificado:', newNumbers);
+document.getElementById('output-with-1').textContent = `Original: ${originalNumbers}\nModificado: ${newNumbers}`;</pre>
+                </div>
+                <button onclick="runWithExample1()" class="bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out">
+                    Ejecutar Ejemplo 1
+                </button>
+                <div id="output-with-1" class="output-container"></div>
+            </div>
+
+            <div class="mb-6">
+                <h3 class="text-xl font-medium text-pink-700 mb-2">
+                    Ejemplo 2: Patrón Redux para actualizar un objeto inmutablemente
+                </h3>
+                <div class="code-block">
+                    <pre>
+const todos = [
+    { id: 1, text: 'Aprender JS', completed: false },
+    { id: 2, text: 'Construir app', completed: false },
+    { id: 3, text: 'Desplegar', completed: false },
+];
+
+function toggleTodo(todoId) {
+    const todoIndex = todos.findIndex(todo => todo.id === todoId);
+    if (todoIndex === -1) return todos; // No se encontró el todo
+
+    const todoToUpdate = todos.at(todoIndex); // Usando .at()
+    const updatedTodo = {
+        ...todoToUpdate,
+        completed: !todoToUpdate.completed,
+    };
+
+    const newTodos = todos.with(todoIndex, updatedTodo); // Usando .with()
+    console.log('Original Todos:', todos);
+    console.log('Nuevos Todos (después de toggle):', newTodos);
+    document.getElementById('output-with-2').textContent = `Original Todos: ${JSON.stringify(todos, null, 2)}\nNuevos Todos: ${JSON.stringify(newTodos, null, 2)}`;
+    return newTodos;
+}
+toggleTodo(2); // Alternar el estado de 'Construir app'</pre>
+                </div>
+                <button onclick="runWithExample2()" class="bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out">
+                    Ejecutar Ejemplo 2
+                </button>
+                <div id="output-with-2" class="output-container"></div>
+            </div>
+        </div>
+
+        <div class="mb-10 p-6 bg-teal-50 rounded-lg shadow-md">
+            <h2 class="text-3xl font-semibold text-teal-800 mb-4">
+                8. `Array.prototype.findLast()` y `Array.prototype.findLastIndex()`
+            </h2>
+            <p class="mb-4 text-gray-700">
+                <code>findLast()</code> devuelve el valor del último elemento del array que satisface la función de prueba proporcionada.
+                <code>findLastIndex()</code> devuelve el índice del último elemento del array que satisface la función de prueba proporcionada.
+            </p>
+
+            <div class="mb-6">
+                <h3 class="text-xl font-medium text-teal-700 mb-2">
+                    Ejemplo 1: Encontrar el último número par
+                </h3>
+                <div class="code-block">
+                    <pre>
+const numbers = [1, 3, 5, 2, 7, 4, 9, 6];
+const lastEven = numbers.findLast(num => num % 2 === 0);
+console.log('Último número par:', lastEven);
+document.getElementById('output-findLast-1').textContent = `Último número par: ${lastEven}`;</pre>
+                </div>
+                <button onclick="runFindLastExample1()" class="bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out">
+                    Ejecutar Ejemplo 1
+                </button>
+                <div id="output-findLast-1" class="output-container"></div>
+            </div>
+
+            <div class="mb-6">
+                <h3 class="text-xl font-medium text-teal-700 mb-2">
+                    Ejemplo 2: Encontrar el índice del último número par
+                </h3>
+                <div class="code-block">
+                    <pre>
+const lastEvenIndex = numbers.findLastIndex(num => num % 2 === 0);
+console.log('Índice del último número par:', lastEvenIndex);
+document.getElementById('output-findLast-2').textContent = `Índice del último número par: ${lastEvenIndex}`;</pre>
+                </div>
+                <button onclick="runFindLastExample2()" class="bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out">
+                    Ejecutar Ejemplo 2
+                </button>
+                <div id="output-findLast-2" class="output-container"></div>
+            </div>
+
+            <div class="mb-6">
+                <h3 class="text-xl font-medium text-teal-700 mb-2">
+                    Ejemplo 3: Encontrar la última persona mayor de 30 y luego menor de 40
+                </h3>
+                <div class="code-block">
+                    <pre>
+const people = [
+    { name: 'Alice', age: 28 },
+    { name: 'Bob', age: 35 },
+    { name: 'Charlie', age: 42 },
+    { name: 'David', age: 32 },
+    { name: 'Eve', age: 29 },
+];
+const lastPersonOver30 = people.findLast(person => person.age > 30);
+const lastPersonUnder40 = people.findLast(person => person.age < 40);
+console.log('Última persona mayor de 30:', lastPersonOver30);
+console.log('Última persona menor de 40:', lastPersonUnder40);
+document.getElementById('output-findLast-3').textContent = `Última persona > 30: ${JSON.stringify(lastPersonOver30)}\nÚltima persona < 40: ${JSON.stringify(lastPersonUnder40)}`;</pre>
+                </div>
+                <button onclick="runFindLastExample3()" class="bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded-md shadow-md shadow-md transition duration-300 ease-in-out">
+                    Ejecutar Ejemplo 3
+                </button>
+                <div id="output-findLast-3" class="output-container"></div>
+            </div>
+        </div>
+
+        <div class="mb-10 p-6 bg-indigo-50 rounded-lg shadow-md">
+            <h2 class="text-3xl font-semibold text-indigo-800 mb-4">
+                9. Operadores de Asignación Lógica (`||=`, `&&=`, `??=`)
+            </h2>
+            <p class="mb-4 text-gray-700">
+                Estos operadores proporcionan una sintaxis abreviada para la asignación condicional.
+            </p>
+
+            <div class="mb-6">
+                <h3 class="text-xl font-medium text-indigo-700 mb-2">
+                    Ejemplo 1: Asignación OR (`||=`)
+                </h3>
+                <div class="code-block">
+                    <pre>
+let value1 = null;
+value1 ||= 'Default Value'; // Asigna 'Default Value' si value1 es falsy (null, undefined, 0, '', false)
+console.log('Value 1 (||=):', value1);
+
+let value2 = 'Existing Value';
+value2 ||= 'Another Default'; // No asigna, ya que value2 no es falsy
+console.log('Value 2 (||=):', value2);
+
+let count = 0;
+count ||= 10; // Asigna 10, ya que 0 es falsy
+console.log('Count (||= con 0):', count);
+document.getElementById('output-logicalAssign-1').textContent = `Value 1: ${value1}\nValue 2: ${value2}\nCount: ${count}`;</pre>
+                </div>
+                <button onclick="runLogicalAssignExample1()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out">
+                    Ejecutar Ejemplo 1
+                </button>
+                <div id="output-logicalAssign-1" class="output-container"></div>
+            </div>
+
+            <div class="mb-6">
+                <h3 class="text-xl font-medium text-indigo-700 mb-2">
+                    Ejemplo 2: Asignación AND (`&&=`)
+                </h3>
+                <div class="code-block">
+                    <pre>
+let userSettings = { theme: 'dark', notifications: true };
+userSettings.notifications &&= false; // Asigna false si userSettings.notifications es truthy
+console.log('User Settings (&&=):', userSettings);
+
+let adminSettings = { theme: 'light', notifications: false };
+adminSettings.notifications &&= true; // No asigna, ya que adminSettings.notifications es falsy
+console.log('Admin Settings (&&=):', adminSettings);
+document.getElementById('output-logicalAssign-2').textContent = `User Settings: ${JSON.stringify(userSettings)}\nAdmin Settings: ${JSON.stringify(adminSettings)}`;</pre>
+                </div>
+                <button onclick="runLogicalAssignExample2()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out">
+                    Ejecutar Ejemplo 2
+                </button>
+                <div id="output-logicalAssign-2" class="output-container"></div>
+            </div>
+
+            <div class="mb-6">
+                <h3 class="text-xl font-medium text-indigo-700 mb-2">
+                    Ejemplo 3: Asignación de Coalescencia Nula (`??=`)
+                </h3>
+                <p class="text-gray-700 mb-2">
+                    A diferencia de <code>||=</code>, <code>??=</code> solo asigna si el operando de la izquierda es <code>null</code> o <code>undefined</code>.
+                </p>
+                <div class="code-block">
+                    <pre>
+let config = { timeout: null, retries: undefined, maxAttempts: 0 };
+
+config.timeout ??= 5000; // Asigna 5000 porque es null
+console.log('Config timeout (??=):', config.timeout);
+
+config.retries ??= 3; // Asigna 3 porque es undefined
+console.log('Config retries (??=):', config.retries);
+
+config.maxAttempts ??= 10; // No asigna, 0 no es null ni undefined
+console.log('Config maxAttempts (??=):', config.maxAttempts);
+
+let firstName = 'John';
+let lastName = '';
+let middleName = null;
+
+firstName ??= 'Default First'; // No asigna
+lastName ??= 'Default Last'; // No asigna
+middleName ??= 'Default Middle'; // Asigna
+
+console.log(`Nombre: ${firstName} ${middleName} ${lastName}`);
+document.getElementById('output-logicalAssign-3').textContent = `Timeout: ${config.timeout}\nRetries: ${config.retries}\nMax Attempts: ${config.maxAttempts}\nNombre: ${firstName} ${middleName} ${lastName}`;</pre>
+                </div>
+                <button onclick="runLogicalAssignExample3()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out">
+                    Ejecutar Ejemplo 3
+                </button>
+                <div id="output-logicalAssign-3" class="output-container"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Funciones para ejecutar los ejemplos de Object.groupBy()
+        function runGroupByExample1() {
+            const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+            const groupedNumbers = Object.groupBy(numbers, (num, index) => {
+                return num % 2 === 0 ? 'pares' : 'impares';
+            });
+            console.log('Números agrupados (pares/impares):', groupedNumbers);
+            document.getElementById('output-groupBy-1').textContent = JSON.stringify(groupedNumbers, null, 2);
+        }
+
+        function runGroupByExample2() {
+            const avengers = [
+                { name: 'Iron Man', planet: 'Tierra' },
+                { name: 'Thor', planet: 'Asgard' },
+                { name: 'Captain America', planet: 'Tierra' },
+                { name: 'Hulk', planet: 'Tierra' },
+                { name: 'Black Widow', planet: 'Tierra' },
+                { name: 'Loki', planet: 'Asgard' },
+            ];
+            const groupedAvengersByPlanet = Object.groupBy(avengers, (avenger) => avenger.planet);
+            console.log('Avengers agrupados por planeta:', groupedAvengersByPlanet);
+            document.getElementById('output-groupBy-2').textContent = JSON.stringify(groupedAvengersByPlanet, null, 2);
+        }
+
+        function runGroupByExample3() {
+            const avengers = [
+                { name: 'Iron Man', planet: 'Tierra' },
+                { name: 'Thor', planet: 'Asgard' },
+                { name: 'Captain America', planet: 'Tierra' },
+                { name: 'Hulk', planet: 'Tierra' },
+                { name: 'Black Widow', planet: 'Tierra' },
+                { name: 'Loki', planet: 'Asgard' },
+            ];
+            const groupedAvengersByOrigin = Object.groupBy(avengers, (avenger) => {
+                return avenger.planet === 'Tierra' ? 'Terrícola' : 'Extraterrestre';
+            });
+            console.log('Avengers agrupados por origen:', groupedAvengersByOrigin);
+            document.getElementById('output-groupBy-3').textContent = JSON.stringify(groupedAvengersByOrigin, null, 2);
+        }
+
+        function runGroupByExample4() {
+            const avengersWithStatus = [
+                { name: 'Iron Man', alive: false },
+                { name: 'Thor', alive: true },
+                { name: 'Captain America', alive: true },
+                { name: 'Black Widow', alive: false },
+            ];
+            const groupedAvengersByStatus = Object.groupBy(avengersWithStatus, (avenger) => avenger.alive);
+            console.log('Avengers agrupados por estado (Alive):', groupedAvengersByStatus);
+            document.getElementById('output-groupBy-4').textContent = JSON.stringify(groupedAvengersByStatus, null, 2);
+        }
+
+        function runGroupByExample5() {
+            const humanLevelPower = Symbol('human');
+            const superHumanLevelPower = Symbol('superhuman');
+            const godLevelPower = Symbol('god');
+
+            const avengersByPower = [
+                { name: 'Iron Man', powerLevel: humanLevelPower },
+                { name: 'Thor', powerLevel: godLevelPower },
+                { name: 'Captain America', powerLevel: humanLevelPower },
+                { name: 'Hulk', powerLevel: superHumanLevelPower },
+                { name: 'Vision', powerLevel: godLevelPower },
+            ];
+
+            const groupedAvengersByPower = Object.groupBy(avengersByPower, (avenger) => avenger.powerLevel);
+            console.log('Avengers agrupados por nivel de poder (Symbols):', groupedAvengersByPower);
+            document.getElementById('output-groupBy-5').textContent = 'Ver consola para este ejemplo debido a los Symbols.';
+        }
+
+        function runGroupByExample6() {
+            const dcHeroes = new Set([
+                { name: 'Superman', power: 'super' },
+                { name: 'Batman', power: 'human' },
+                { name: 'Wonder Woman', power: 'super' },
+                { name: 'Flash', power: 'super' },
+                { name: 'Green Arrow', power: 'human' },
+            ]);
+            const groupedDCHeroes = Object.groupBy(dcHeroes, (hero) => hero.power);
+            console.log('Héroes de DC agrupados por poder:', groupedDCHeroes);
+            document.getElementById('output-groupBy-6').textContent = JSON.stringify(groupedDCHeroes, null, 2);
+        }
+
+        // Funciones para ejecutar los ejemplos de Map.groupBy()
+        function runMapGroupByExample1() {
+            const avengersForMap = [
+                { name: 'Iron Man', planet: 'Tierra' },
+                { name: 'Thor', planet: 'Asgard' },
+                { name: 'Captain America', planet: 'Tierra' },
+                { name: 'Hulk', planet: 'Tierra' },
+                { name: 'Black Widow', planet: 'Tierra' },
+                { name: 'Loki', planet: 'Asgard' },
+            ];
+            const groupedAvengersByPlanetMap = Map.groupBy(avengersForMap, (avenger) => avenger.planet);
+            console.log('Avengers agrupados por planeta (Map):', groupedAvengersByPlanetMap);
+            const mapAsObject = Object.fromEntries(groupedAvengersByPlanetMap);
+            document.getElementById('output-mapGroupBy-1').textContent = JSON.stringify(mapAsObject, null, 2);
+        }
+
+        // Funciones para ejecutar los ejemplos de Array.prototype.at()
+        const atNumbers = [10, 20, 30, 40, 50]; // Definir una vez para todos los ejemplos de .at()
+        function runAtExample1() {
+            const elementAtIndex2 = atNumbers.at(2); // 30
+            console.log('Elemento en el índice 2:', elementAtIndex2);
+            document.getElementById('output-at-1').textContent = `Elemento en el índice 2: ${elementAtIndex2}`;
+        }
+
+        function runAtExample2() {
+            const lastElement = atNumbers.at(-1); // 50
+            console.log('Último elemento:', lastElement);
+            document.getElementById('output-at-2').textContent = `Último elemento: ${lastElement}`;
+        }
+
+        function runAtExample3() {
+            const secondLastElement = atNumbers.at(-2); // 40
+            console.log('Penúltimo elemento:', secondLastElement);
+            document.getElementById('output-at-3').textContent = `Penúltimo elemento: ${secondLastElement}`;
+        }
+
+        // Funciones para ejecutar los ejemplos de Array.prototype.toReversed()
+        function runToReversedExample1() {
+            const originalArray = [1, 2, 3, 4, 5];
+            const reversedArray = originalArray.toReversed();
+            console.log('Array original:', originalArray);
+            console.log('Array invertido (nuevo):', reversedArray);
+            document.getElementById('output-toReversed-1').textContent = `Original: ${originalArray}\nInvertido: ${reversedArray}`;
+        }
+
+        function runToReversedExample2() {
+            const users = [
+                { id: 1, name: 'Alice', address: { city: 'NY' } },
+                { id: 2, name: 'Bob', address: { city: 'LA' } },
+            ];
+            const reversedUsers = users.toReversed();
+            console.log('Usuarios original:', users);
+            console.log('Usuarios invertido (copia superficial):', reversedUsers);
+            reversedUsers[0].address.city = 'Chicago';
+            console.log('Usuarios original después de modificar copia:', users);
+            document.getElementById('output-toReversed-2').textContent = `Original: ${JSON.stringify(users, null, 2)}\nInvertido (copia superficial): ${JSON.stringify(reversedUsers, null, 2)}\n(Ver consola para detalles de mutación)`;
+        }
+
+        function runToReversedExample3() {
+            const usersDeep = [
+                { id: 1, name: 'Alice', address: { city: 'NY' } },
+                { id: 2, name: 'Bob', address: { city: 'LA' } },
+            ];
+            const deepClonedUsers = structuredClone(usersDeep);
+            const reversedDeepClonedUsers = deepClonedUsers.toReversed();
+            console.log('Usuarios original (deep):', usersDeep);
+            console.log('Usuarios invertido (copia profunda):', reversedDeepClonedUsers);
+            reversedDeepClonedUsers[0].address.city = 'Boston';
+            console.log('Usuarios original después de modificar copia profunda:', usersDeep);
+            document.getElementById('output-toReversed-3').textContent = `Original: ${JSON.stringify(usersDeep, null, 2)}\nInvertido (copia profunda): ${JSON.stringify(reversedDeepClonedUsers, null, 2)}\n(Ver consola para detalles de no-mutación)`;
+        }
+
+        // Funciones para ejecutar los ejemplos de Array.prototype.toSorted()
+        function runToSortedExample1() {
+            const numbersToSort = [1, 10, 2, 20, 3];
+            const sortedIncorrectly = numbersToSort.toSorted();
+            console.log('Original:', numbersToSort);
+            console.log('Ordenado incorrectamente (Unicode):', sortedIncorrectly);
+            document.getElementById('output-toSorted-1').textContent = `Original: ${numbersToSort}\nOrdenado (incorrecto): ${sortedIncorrectly}`;
+        }
+
+        function runToSortedExample2() {
+            const numbersAsc = [1, 10, 2, 20, 3];
+            const sortedAsc = numbersAsc.toSorted((a, b) => a - b);
+            console.log('Original:', numbersAsc);
+            console.log('Ordenado ascendente:', sortedAsc);
+            document.getElementById('output-toSorted-2').textContent = `Original: ${numbersAsc}\nOrdenado (ascendente): ${sortedAsc}`;
+        }
+
+        function runToSortedExample3() {
+            const numbersDesc = [1, 10, 2, 20, 3];
+            const sortedDesc = numbersDesc.toSorted((a, b) => b - a);
+            console.log('Original:', numbersDesc);
+            console.log('Ordenado descendente:', sortedDesc);
+            document.getElementById('output-toSorted-3').textContent = `Original: ${numbersDesc}\nOrdenado (descendente): ${sortedDesc}`;
+        }
+
+        function runToSortedExample4() {
+            const people = [
+                { name: 'John', age: 30 },
+                { name: 'Jane', age: 25 },
+                { name: 'Doe', age: 35 },
+            ];
+            const sortedPeopleAsc = people.toSorted((a, b) => a.age - b.age);
+            const sortedPeopleDesc = people.toSorted((a, b) => b.age - a.age);
+            console.log('Original:', people);
+            console.log('Personas ordenadas por edad (ascendente):', sortedPeopleAsc);
+            console.log('Personas ordenadas por edad (descendente):', sortedPeopleDesc);
+            document.getElementById('output-toSorted-4').textContent = `Original: ${JSON.stringify(people, null, 2)}\nOrdenado (ascendente): ${JSON.stringify(sortedPeopleAsc, null, 2)}\nOrdenado (descendente): ${JSON.stringify(sortedPeopleDesc, null, 2)}`;
+        }
+
+        function runToSortedExample5() {
+            const fruits = ['banana', 'apple', 'Orange', 'kiwi'];
+            const sortedFruits = fruits.toSorted((a, b) => a.localeCompare(b));
+            console.log('Original:', fruits);
+            console.log('Frutas ordenadas alfabéticamente:', sortedFruits);
+            document.getElementById('output-toSorted-5').textContent = `Original: ${fruits}\nOrdenado (alfabético): ${sortedFruits}`;
+        }
+
+        // Funciones para ejecutar los ejemplos de Array.prototype.toSpliced()
+        function runToSplicedExample1() {
+            const originalArr = [1, 2, 3, 4, 5];
+            const replacedArr = originalArr.toSpliced(2, 1, 99);
+            console.log('Original:', originalArr);
+            console.log('Reemplazado:', replacedArr);
+            document.getElementById('output-toSpliced-1').textContent = `Original: ${originalArr}\nReemplazado: ${replacedArr}`;
+        }
+
+        function runToSplicedExample2() {
+            const insertArr = [1, 2, 3, 4, 5];
+            const insertedArr = insertArr.toSpliced(2, 0, 99);
+            console.log('Original:', insertArr);
+            console.log('Insertado:', insertedArr);
+            document.getElementById('output-toSpliced-2').textContent = `Original: ${insertArr}\nInsertado: ${insertedArr}`;
+        }
+
+        function runToSplicedExample3() {
+            const insertMultipleArr = [1, 2, 3, 4, 5];
+            const insertedMultipleArr = insertMultipleArr.toSpliced(2, 0, 99, 100, 101);
+            console.log('Original:', insertMultipleArr);
+            console.log('Insertado múltiple:', insertedMultipleArr);
+            document.getElementById('output-toSpliced-3').textContent = `Original: ${insertMultipleArr}\nInsertado múltiple: ${insertedMultipleArr}`;
+        }
+
+        function runToSplicedExample4() {
+            const deleteArr = [1, 2, 3, 4, 5];
+            const deletedArr = deleteArr.toSpliced(2, 1);
+            console.log('Original:', deleteArr);
+            console.log('Eliminado:', deletedArr);
+            document.getElementById('output-toSpliced-4').textContent = `Original: ${deleteArr}\nEliminado: ${deletedArr}`;
+        }
+
+        // Funciones para ejecutar los ejemplos de Array.prototype.with()
+        function runWithExample1() {
+            const originalNumbers = [10, 20, 30, 40, 50];
+            const newNumbers = originalNumbers.with(2, 99);
+            console.log('Original:', originalNumbers);
+            console.log('Nuevo array con elemento modificado:', newNumbers);
+            document.getElementById('output-with-1').textContent = `Original: ${originalNumbers}\nModificado: ${newNumbers}`;
+        }
+
+        function runWithExample2() {
+            const todos = [
+                { id: 1, text: 'Aprender JS', completed: false },
+                { id: 2, text: 'Construir app', completed: false },
+                { id: 3, text: 'Desplegar', completed: false },
+            ];
+
+            function toggleTodo(todoId) {
+                const todoIndex = todos.findIndex(todo => todo.id === todoId);
+                if (todoIndex === -1) return todos;
+
+                const todoToUpdate = todos.at(todoIndex);
+                const updatedTodo = {
+                    ...todoToUpdate,
+                    completed: !todoToUpdate.completed,
+                };
+
+                const newTodos = todos.with(todoIndex, updatedTodo);
+                console.log('Original Todos:', todos);
+                console.log('Nuevos Todos (después de toggle):', newTodos);
+                document.getElementById('output-with-2').textContent = `Original Todos: ${JSON.stringify(todos, null, 2)}\nNuevos Todos: ${JSON.stringify(newTodos, null, 2)}`;
+                return newTodos;
+            }
+            toggleTodo(2);
+        }
+
+        // Funciones para ejecutar los ejemplos de Array.prototype.findLast() y findLastIndex()
+        const findLastNumbers = [1, 3, 5, 2, 7, 4, 9, 6]; // Definir una vez para todos los ejemplos de findLast
+        const findLastPeople = [
+            { name: 'Alice', age: 28 },
+            { name: 'Bob', age: 35 },
+            { name: 'Charlie', age: 42 },
+            { name: 'David', age: 32 },
+            { name: 'Eve', age: 29 },
+        ];
+
+        function runFindLastExample1() {
+            const lastEven = findLastNumbers.findLast(num => num % 2 === 0);
+            console.log('Último número par:', lastEven);
+            document.getElementById('output-findLast-1').textContent = `Último número par: ${lastEven}`;
+        }
+
+        function runFindLastExample2() {
+            const lastEvenIndex = findLastNumbers.findLastIndex(num => num % 2 === 0);
+            console.log('Índice del último número par:', lastEvenIndex);
+            document.getElementById('output-findLast-2').textContent = `Índice del último número par: ${lastEvenIndex}`;
+        }
+
+        function runFindLastExample3() {
+            const lastPersonOver30 = findLastPeople.findLast(person => person.age > 30);
+            const lastPersonUnder40 = findLastPeople.findLast(person => person.age < 40);
+            console.log('Última persona mayor de 30:', lastPersonOver30);
+            console.log('Última persona menor de 40:', lastPersonUnder40);
+            document.getElementById('output-findLast-3').textContent = `Última persona > 30: ${JSON.stringify(lastPersonOver30)}\nÚltima persona < 40: ${JSON.stringify(lastPersonUnder40)}`;
+        }
+
+        // Funciones para ejecutar los ejemplos de Operadores de Asignación Lógica
+        function runLogicalAssignExample1() {
+            let value1 = null;
+            value1 ||= 'Default Value';
+            console.log('Value 1 (||=):', value1);
+
+            let value2 = 'Existing Value';
+            value2 ||= 'Another Default';
+            console.log('Value 2 (||=):', value2);
+
+            let count = 0;
+            count ||= 10;
+            console.log('Count (||= con 0):', count);
+            document.getElementById('output-logicalAssign-1').textContent = `Value 1: ${value1}\nValue 2: ${value2}\nCount: ${count}`;
+        }
+
+        function runLogicalAssignExample2() {
+            let userSettings = { theme: 'dark', notifications: true };
+            userSettings.notifications &&= false;
+            console.log('User Settings (&&=):', userSettings);
+
+            let adminSettings = { theme: 'light', notifications: false };
+            adminSettings.notifications &&= true;
+            console.log('Admin Settings (&&=):', adminSettings);
+            document.getElementById('output-logicalAssign-2').textContent = `User Settings: ${JSON.stringify(userSettings)}\nAdmin Settings: ${JSON.stringify(adminSettings)}`;
+        }
+
+        function runLogicalAssignExample3() {
+            let config = { timeout: null, retries: undefined, maxAttempts: 0 };
+
+            config.timeout ??= 5000;
+            console.log('Config timeout (??=):', config.timeout);
+
+            config.retries ??= 3;
+            console.log('Config retries (??=):', config.retries);
+
+            config.maxAttempts ??= 10;
+            console.log('Config maxAttempts (??=):', config.maxAttempts);
+
+            let firstName = 'John';
+            let lastName = '';
+            let middleName = null;
+
+            firstName ??= 'Default First';
+            lastName ??= 'Default Last';
+            middleName ??= 'Default Middle';
+
+            console.log(`Nombre: ${firstName} ${middleName} ${lastName}`);
+            document.getElementById('output-logicalAssign-3').textContent = `Timeout: ${config.timeout}\nRetries: ${config.retries}\nMax Attempts: ${config.maxAttempts}\nNombre: ${firstName} ${middleName} ${lastName}`;
+        }
+    </script>
+</body>
+</html>
