@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios JavaScript - Nivel Cero a Medio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2d3748, #4a5568);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .section-header {
+            padding: 20px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            text-align: center;
+        }
+        
+        .principiante { background: linear-gradient(135deg, #48bb78, #38a169); }
+        .basico { background: linear-gradient(135deg, #ed8936, #dd6b20); }
+        .intermedio { background: linear-gradient(135deg, #e53e3e, #c53030); }
+        
+        .exercise {
+            background: #f8f9fa;
+            margin: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .exercise-title {
+            background: #4a5568;
+            color: white;
+            padding: 15px;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        .exercise-content {
+            padding: 20px;
+        }
+        
+        .result {
+            background: #e8f5e8;
+            border: 1px solid #68d391;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .result h4 {
+            color: #2d5016;
+            margin-bottom: 10px;
+        }
+        
+        .code {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.4;
+            margin-top: 10px;
+        }
+        
+        .code pre {
+            margin: 0;
+        }
+        
+        .keyword { color: #63b3ed; }
+        .string { color: #68d391; }
+        .comment { color: #a0aec0; font-style: italic; }
+        .function { color: #fbb6ce; }
+        
+        .run-button {
+            background: linear-gradient(135deg, #4299e1, #3182ce);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .run-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(66, 153, 225, 0.3);
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2rem; }
+            .content { padding: 20px; }
+            .exercise { margin: 10px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Ejercicios JavaScript</h1>
+            <p>Desde nivel cero hasta nivel medio</p>
+        </div>
+        
+        <div class="content">
+            <!-- NIVEL PRINCIPIANTE -->
+            <div class="section">
+                <div class="section-header principiante">
+                    🌱 NIVEL PRINCIPIANTE
+                </div>
+                
+                <div class="exercise">
+                    <div class="exercise-title">Ejercicio 1: Variables y operaciones básicas</div>
+                    <div class="exercise-content">
+                        <div class="result">
+                            <h4>Resultado:</h4>
+                            <div id="resultado1"></div>
+                        </div>
+                        <button class="run-button" onclick="ejercicio1()">Ejecutar</button>
+                        <div class="code">
+                            <pre><code><span class="keyword">let</span> nombre = <span class="string">"Ana"</span>;
+<span class="keyword">let</span> edad = <span class="keyword">25</span>;
+<span class="keyword">let</span> ciudad = <span class="string">"Madrid"</span>;
+<span class="keyword">console</span>.log(<span class="string">`Hola, soy ${nombre}, tengo ${edad} años y vivo en ${ciudad}`</span>);</code></pre>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="exercise">
+                    <div class="exercise-title">Ejercicio 2: Calculadora simple</div>
+                    <div class="exercise-content">
+                        <div class="result">
+                            <h4>Resultado:</h4>
+                            <div id="resultado2"></div>
+                        </div>
+                        <button class="run-button" onclick="ejercicio2()">Ejecutar</button>
+                        <div class="code">
+                            <pre><code><span class="keyword">function</span> <span class="function">calculadora</span>(a, b) {
+    <span class="keyword">return</span> {
+        suma: a + b,
+        resta: a - b,
+        multiplicacion: a * b,
+        division: a / b
+    };
+}
+<span class="keyword">console</span>.log(calculadora(<span class="keyword">10</span>, <span class="keyword">5</span>));</code></pre>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="exercise">
+                    <div class="exercise-title">Ejercicio 3: Par o impar</div>
+                    <div class="exercise-content">
+                        <div class="result">
+                            <h4>Resultado:</h4>
+                            <div id="resultado3"></div>
+                        </div>
+                        <button class="run-button" onclick="ejercicio3()">Ejecutar</button>
+                        <div class="code">
+                            <pre><code><span class="keyword">function</span> <span class="function">parOImpar</span>(numero) {
+    <span class="keyword">return</span> numero % <span class="keyword">2</span> === <span class="keyword">0</span> ? <span class="string">"Par"</span> : <span class="string">"Impar"</span>;
+}
+<span class="keyword">console</span>.log(parOImpar(<span class="keyword">7</span>)); <span class="comment">// "Impar"</span>
+<span class="keyword">console</span>.log(parOImpar(<span class="keyword">8</span>)); <span class="comment">// "Par"</span></code></pre>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="exercise">
+                    <div class="exercise-title">Ejercicio 4: Mayor de tres números</div>
+                    <div class="exercise-content">
+                        <div class="result">
+                            <h4>Resultado:</h4>
+                            <div id="resultado4"></div>
+                        </div>
+                        <button class="run-button" onclick="ejercicio4()">Ejecutar</button>
+                        <div class="code">
+                            <pre><code><span class="keyword">function</span> <span class="function">mayorDeTres</span>(a, b, c) {
+    <span class="keyword">return</span> <span class="keyword">Math</span>.max(a, b, c);
+}
+<span class="keyword">console</span>.log(mayorDeTres(<span class="keyword">5</span>, <span class="keyword">12</span>, <span class="keyword">8</span>)); <span class="comment">// 12</span></code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- NIVEL BÁSICO -->
+            <div class="section">
+                <div class="section-header basico">
+                    🔥 NIVEL BÁSICO
+                </div>
+                
+                <div class="exercise">
+                    <div class="exercise-title">Ejercicio 5: Contar vocales</div>
+                    <div class="exercise-content">
+                        <div class="result">
+                            <h4>Resultado:</h4>
+                            <div id="resultado5"></div>
+                        </div>
+                        <button class="run-button" onclick="ejercicio5()">Ejecutar</button>
+                        <div class="code">
+                            <pre><code><span class="keyword">function</span> <span class="function">contarVocales</span>(palabra) {
+    <span class="keyword">let</span> vocales = <span class="string">"aeiouAEIOU"</span>;
+    <span class="keyword">let</span> contador = <span class="keyword">0</span>;
+    <span class="keyword">for</span> (<span class="keyword">let</span> letra <span class="keyword">of</span> palabra) {
+        <span class="keyword">if</span> (vocales.includes(letra)) {
+            contador++;
+        }
+    }
+    <span class="keyword">return</span> contador;
+}
+<span class="keyword">console</span>.log(contarVocales(<span class="string">"Hola mundo"</span>)); <span class="comment">// 4</span></code></pre>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="exercise">
+                    <div class="exercise-title">Ejercicio 6: Tabla de multiplicar</div>
+                    <div class="exercise-content">
+                        <div class="result">
+                            <h4>Resultado:</h4>
+                            <div id="resultado6"></div>
+                        </div>
+                        <button class="run-button" onclick="ejercicio6()">Ejecutar</button>
+                        <div class="code">
+                            <pre><code><span class="keyword">function</span> <span class="function">tablaMultiplicar</span>(numero) {
+    <span class="keyword">let</span> resultado = <span class="string">""</span>;
+    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="keyword">1</span>; i <= <span class="keyword">10</span>; i++) {
+        resultado += <span class="string">`${numero} x ${i} = ${numero * i}\n`</span>;
+    }
+    <span class="keyword">return</span> resultado;
+}
+<span class="keyword">console</span>.log(tablaMultiplicar(<span class="keyword">5</span>));</code></pre>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="exercise">
+                    <div class="exercise-title">Ejercicio 7: Invertir texto</div>
+                    <div class="exercise-content">
+                        <div class="result">
+                            <h4>Resultado:</h4>
+                            <div id="resultado7"></div>
+                        </div>
+                        <button class="run-button" onclick="ejercicio7()">Ejecutar</button>
+                        <div class="code">
+                            <pre><code><span class="keyword">function</span> <span class="function">invertirTexto</span>(texto) {
+    <span class="keyword">return</span> texto.split(<span class="string">""</span>).reverse().join(<span class="string">""</span>);
+}
+<span class="keyword">console</span>.log(invertirTexto(<span class="string">"JavaScript"</span>)); <span class="comment">// "tpircSavaJ"</span></code></pre>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="exercise">
+                    <div class="exercise-title">Ejercicio 8: FizzBuzz (primeros 20)</div>
+                    <div class="exercise-content">
+                        <div class="result">
+                            <h4>Resultado:</h4>
+                            <div id="resultado8"></div>
+                        </div>
+                        <button class="run-button" onclick="ejercicio8()">Ejecutar</button>
+                        <div class="code">
+                            <pre><code><span class="keyword">function</span> <span class="function">fizzBuzz</span>(limite = <span class="keyword">20</span>) {
+    <span class="keyword">let</span> resultado = <span class="string">""</span>;
+    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="keyword">1</span>; i <= limite; i++) {
+        <span class="keyword">if</span> (i % <span class="keyword">15</span> === <span class="keyword">0</span>) {
+            resultado += <span class="string">"FizzBuzz "</span>;
+        } <span class="keyword">else if</span> (i % <span class="keyword">3</span> === <span class="keyword">0</span>) {
+            resultado += <span class="string">"Fizz "</span>;
+        } <span class="keyword">else if</span> (i % <span class="keyword">5</span> === <span class="keyword">0</span>) {
+            resultado += <span class="string">"Buzz "</span>;
+        } <span class="keyword">else</span> {
+            resultado += i + <span class="string">" "</span>;
+        }
+    }
+    <span class="keyword">return</span> resultado;
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- NIVEL INTERMEDIO -->
+            <div class="section">
+                <div class="section-header intermedio">
+                    💪 NIVEL INTERMEDIO
+                </div>
+                
+                <div class="exercise">
+                    <div class="exercise-title">Ejercicio 9: Gestión de lista de tareas</div>
+                    <div class="exercise-content">
+                        <div class="result">
+                            <h4>Resultado:</h4>
+                            <div id="resultado9"></div>
+                        </div>
+                        <button class="run-button" onclick="ejercicio9()">Ejecutar</button>
+                        <div class="code">
+                            <pre><code><span class="keyword">const</span> listaTareas = {
+    tareas: [],
+    
+    <span class="function">agregar</span>(tarea) {
+        <span class="keyword">this</span>.tareas.push({
+            id: <span class="keyword">Date</span>.now(),
+            texto: tarea,
+            completada: <span class="keyword">false</span>
+        });
+    },
+    
+    <span class="function">completar</span>(id) {
+        <span class="keyword">let</span> tarea = <span class="keyword">this</span>.tareas.find(t => t.id === id);
+        <span class="keyword">if</span> (tarea) tarea.completada = <span class="keyword">true</span>;
+    },
+    
+    <span class="function">mostrar</span>() {
+        <span class="keyword">return</span> <span class="keyword">this</span>.tareas.map(t => 
+            <span class="string">`${t.completada ? '✅' : '❌'} ${t.texto}`</span>
+        );
+    }
+};</code></pre>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="exercise">
+                    <div class="exercise-title">Ejercicio 10: Calculadora de notas</div>
+                    <div class="exercise-content">
+                        <div class="result">
+                            <h4>Resultado:</h4>
+                            <div id="resultado10"></div>
+                        </div>
+                        <button class="run-button" onclick="ejercicio10()">Ejecutar</button>
+                        <div class="code">
+                            <pre><code><span class="keyword">function</span> <span class="function">calculadoraNotas</span>(notas) {
+    <span class="keyword">let</span> promedio = notas.reduce((sum, nota) => sum + nota, <span class="keyword">0</span>) / notas.length;
+    <span class="keyword">let</span> mayor = <span class="keyword">Math</span>.max(...notas);
+    <span class="keyword">let</span> menor = <span class="keyword">Math</span>.min(...notas);
+    <span class="keyword">let</span> aprobadas = notas.filter(nota => nota >= <span class="keyword">6</span>).length;
+    
+    <span class="keyword">return</span> {
+        promedio: promedio.toFixed(<span class="keyword">2</span>),
+        notaMayor: mayor,
+        notaMenor: menor,
+        aprobadas: aprobadas
+    };
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="exercise">
+                    <div class="exercise-title">Ejercicio 11: Buscador en array</div>
+                    <div class="exercise-content">
+                        <div class="result">
+                            <h4>Resultado:</h4>
+                            <div id="resultado11"></div>
+                        </div>
+                        <button class="run-button" onclick="ejercicio11()">Ejecutar</button>
+                        <div class="code">
+                            <pre><code><span class="keyword">function</span> <span class="function">buscarEnArray</span>(array, elemento) {
+    <span class="keyword">let</span> encontrado = array.includes(elemento);
+    <span class="keyword">let</span> posicion = array.indexOf(elemento);
+    <span class="keyword">let</span> veces = array.filter(item => item === elemento).length;
+    
+    <span class="keyword">return</span> {
+        encontrado: encontrado,
+        posicion: posicion !== <span class="keyword">-1</span> ? posicion : <span class="string">"No encontrado"</span>,
+        apariciones: veces
+    };
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="exercise">
+                    <div class="exercise-title">Ejercicio 12: Contador de palabras</div>
+                    <div class="exercise-content">
+                        <div class="result">
+                            <h4>Resultado:</h4>
+                            <div id="resultado12"></div>
+                        </div>
+                        <button class="run-button" onclick="ejercicio12()">Ejecutar</button>
+                        <div class="code">
+                            <pre><code><span class="keyword">function</span> <span class="function">contadorPalabras</span>(texto) {
+    <span class="keyword">let</span> palabras = texto.toLowerCase().split(<span class="keyword">/\s+/</span>);
+    <span class="keyword">let</span> palabraLarga = palabras.reduce((a, b) => a.length > b.length ? a : b);
+    
+    <span class="comment">// Contar cada palabra</span>
+    <span class="keyword">let</span> contador = {};
+    palabras.forEach(palabra => {
+        contador[palabra] = (contador[palabra] || <span class="keyword">0</span>) + <span class="keyword">1</span>;
+    });
+    
+    <span class="keyword">return</span> {
+        totalPalabras: palabras.length,
+        palabraMasLarga: palabraLarga,
+        contadorPalabras: contador
+    };
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Funciones de los ejercicios
+        
+        function ejercicio1() {
+            let nombre = "Ana";
+            let edad = 25;
+            let ciudad = "Madrid";
+            let resultado = `Hola, soy ${nombre}, tengo ${edad} años y vivo en ${ciudad}`;
+            document.getElementById('resultado1').innerHTML = resultado;
+        }
+        
+        function ejercicio2() {
+            function calculadora(a, b) {
+                return {
+                    suma: a + b,
+                    resta: a - b,
+                    multiplicacion: a * b,
+                    division: a / b
+                };
+            }
+            let resultado = calculadora(10, 5);
+            document.getElementById('resultado2').innerHTML = JSON.stringify(resultado, null, 2);
+        }
+        
+        function ejercicio3() {
+            function parOImpar(numero) {
+                return numero % 2 === 0 ? "Par" : "Impar";
+            }
+            let resultado = `7 es ${parOImpar(7)}<br>8 es ${parOImpar(8)}`;
+            document.getElementById('resultado3').innerHTML = resultado;
+        }
+        
+        function ejercicio4() {
+            function mayorDeTres(a, b, c) {
+                return Math.max(a, b, c);
+            }
+            let resultado = `El mayor de 5, 12 y 8 es: ${mayorDeTres(5, 12, 8)}`;
+            document.getElementById('resultado4').innerHTML = resultado;
+        }
+        
+        function ejercicio5() {
+            function contarVocales(palabra) {
+                let vocales = "aeiouAEIOU";
+                let contador = 0;
+                for (let letra of palabra) {
+                    if (vocales.includes(letra)) {
+                        contador++;
+                    }
+                }
+                return contador;
+            }
+            let resultado = `"Hola mundo" tiene ${contarVocales("Hola mundo")} vocales`;
+            document.getElementById('resultado5').innerHTML = resultado;
+        }
+        
+        function ejercicio6() {
+            function tablaMultiplicar(numero) {
+                let resultado = "";
+                for (let i = 1; i <= 10; i++) {
+                    resultado += `${numero} x ${i} = ${numero * i}<br>`;
+                }
+                return resultado;
+            }
+            document.getElementById('resultado6').innerHTML = tablaMultiplicar(5);
+        }
+        
+        function ejercicio7() {
+            function invertirTexto(texto) {
+                return texto.split("").reverse().join("");
+            }
+            let resultado = `"JavaScript" invertido es: "${invertirTexto("JavaScript")}"`;
+            document.getElementById('resultado7').innerHTML = resultado;
+        }
+        
+        function ejercicio8() {
+            function fizzBuzz(limite = 20) {
+                let resultado = "";
+                for (let i = 1; i <= limite; i++) {
+                    if (i % 15 === 0) {
+                        resultado += "FizzBuzz ";
+                    } else if (i % 3 === 0) {
+                        resultado += "Fizz ";
+                    } else if (i % 5 === 0) {
+                        resultado += "Buzz ";
+                    } else {
+                        resultado += i + " ";
+                    }
+                }
+                return resultado;
+            }
+            document.getElementById('resultado8').innerHTML = fizzBuzz(20);
+        }
+        
+        function ejercicio9() {
+            const listaTareas = {
+                tareas: [],
+                
+                agregar(tarea) {
+                    this.tareas.push({
+                        id: Date.now(),
+                        texto: tarea,
+                        completada: false
+                    });
+                },
+                
+                completar(id) {
+                    let tarea = this.tareas.find(t => t.id === id);
+                    if (tarea) tarea.completada = true;
+                },
+                
+                mostrar() {
+                    return this.tareas.map(t => 
+                        `${t.completada ? '✅' : '❌'} ${t.texto}`
+                    );
+                }
+            };
+            
+            listaTareas.agregar("Estudiar JavaScript");
+            listaTareas.agregar("Hacer ejercicio");
+            listaTareas.completar(listaTareas.tareas[0].id);
+            
+            document.getElementById('resultado9').innerHTML = listaTareas.mostrar().join('<br>');
+        }
+        
+        function ejercicio10() {
+            function calculadoraNotas(notas) {
+                let promedio = notas.reduce((sum, nota) => sum + nota, 0) / notas.length;
+                let mayor = Math.max(...notas);
+                let menor = Math.min(...notas);
+                let aprobadas = notas.filter(nota => nota >= 6).length;
+                
+                return {
+                    promedio: promedio.toFixed(2),
+                    notaMayor: mayor,
+                    notaMenor: menor,
+                    aprobadas: aprobadas
+                };
+            }
+            let resultado = calculadoraNotas([8, 5, 9, 6, 7, 4, 10]);
+            document.getElementById('resultado10').innerHTML = JSON.stringify(resultado, null, 2);
+        }
+        
+        function ejercicio11() {
+            function buscarEnArray(array, elemento) {
+                let encontrado = array.includes(elemento);
+                let posicion = array.indexOf(elemento);
+                let veces = array.filter(item => item === elemento).length;
+                
+                return {
+                    encontrado: encontrado,
+                    posicion: posicion !== -1 ? posicion : "No encontrado",
+                    apariciones: veces
+                };
+            }
+            let resultado = buscarEnArray([1, 2, 3, 2, 4, 2], 2);
+            document.getElementById('resultado11').innerHTML = JSON.stringify(resultado, null, 2);
+        }
+        
+        function ejercicio12() {
+            function contadorPalabras(texto) {
+                let palabras = texto.toLowerCase().split(/\s+/);
+                let palabraLarga = palabras.reduce((a, b) => a.length > b.length ? a : b);
+                
+                let contador = {};
+                palabras.forEach(palabra => {
+                    contador[palabra] = (contador[palabra] || 0) + 1;
+                });
+                
+                return {
+                    totalPalabras: palabras.length,
+                    palabraMasLarga: palabraLarga,
+                    contadorPalabras: contador
+                };
+            }
+            let resultado = contadorPalabras("Hola mundo, este mundo es grande");
+            document.getElementById('resultado12').innerHTML = JSON.stringify(resultado, null, 2);
+        }
+    </script>
+</body>
+</html>
