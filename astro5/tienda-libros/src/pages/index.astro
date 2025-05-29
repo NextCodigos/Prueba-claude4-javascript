@@ -1,0 +1,80 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import BookCard from '../components/BookCard.astro';
+import { books } from '../data/books.js';
+
+const featuredBooks = books.slice(0, 3);
+---
+
+<Layout title="LibrosOnline - Tu librería favorita">
+  <Header />
+  
+  <main>
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-blue-600 to-purple-700 text-white py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h1 class="text-4xl md:text-6xl font-bold mb-6">
+          Descubre tu próxima lectura
+        </h1>
+        <p class="text-xl mb-8 max-w-2xl mx-auto">
+          Miles de libros te esperan. Desde clásicos hasta novedades, encuentra la historia perfecta para ti.
+        </p>
+        <button class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+          Explorar libros
+        </button>
+      </div>
+    </section>
+
+    <!-- Featured Books -->
+    <section class="py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Libros destacados</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {featuredBooks.map(book => (
+            <BookCard
+              title={book.title}
+              author={book.author}
+              price={book.price}
+              image={book.image}
+              category={book.category}
+            />
+          ))}
+        </div>
+        <div class="text-center mt-12">
+          <a href="/libros" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+            Ver todos los libros
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="bg-gray-100 py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Categorías populares</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div class="bg-white p-6 rounded-lg text-center hover:shadow-md transition-shadow">
+            <div class="text-4xl mb-4">📚</div>
+            <h3 class="font-semibold">Ficción</h3>
+          </div>
+          <div class="bg-white p-6 rounded-lg text-center hover:shadow-md transition-shadow">
+            <div class="text-4xl mb-4">🔬</div>
+            <h3 class="font-semibold">Ciencia</h3>
+          </div>
+          <div class="bg-white p-6 rounded-lg text-center hover:shadow-md transition-shadow">
+            <div class="text-4xl mb-4">🏛️</div>
+            <h3 class="font-semibold">Historia</h3>
+          </div>
+          <div class="bg-white p-6 rounded-lg text-center hover:shadow-md transition-shadow">
+            <div class="text-4xl mb-4">👑</div>
+            <h3 class="font-semibold">Clásicos</h3>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

@@ -1,0 +1,41 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import BookCard from '../components/BookCard.astro';
+import { books } from '../data/books.js';
+---
+
+<Layout title="Todos los libros - LibrosOnline">
+  <Header />
+  
+  <main class="py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-3xl font-bold text-gray-900 mb-8">Todos nuestros libros</h1>
+      
+      <!-- Filtros -->
+      <div class="mb-8 flex flex-wrap gap-4">
+        <button class="bg-blue-600 text-white px-4 py-2 rounded-lg">Todos</button>
+        <button class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300">Ficción</button>
+        <button class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300">Historia</button>
+        <button class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300">Clásicos</button>
+        <button class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300">Infantil</button>
+      </div>
+
+      <!-- Lista de libros -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+        {books.map(book => (
+          <BookCard
+            title={book.title}
+            author={book.author}
+            price={book.price}
+            image={book.image}
+            category={book.category}
+          />
+        ))}
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

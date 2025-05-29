@@ -1,0 +1,76 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Contacto - LibrosOnline">
+  <Header />
+  
+  <main class="py-12">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-3xl font-bold text-gray-900 mb-8 text-center">Contacto</h1>
+      
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <!-- Formulario -->
+        <div>
+          <h2 class="text-xl font-semibold mb-6">Envíanos un mensaje</h2>
+          <form class="space-y-6">
+            <div>
+              <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Nombre</label>
+              <input type="text" id="name" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            </div>
+            <div>
+              <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+              <input type="email" id="email" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            </div>
+            <div>
+              <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Mensaje</label>
+              <textarea id="message" rows="4" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+            </div>
+            <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">
+              Enviar mensaje
+            </button>
+          </form>
+        </div>
+
+        <!-- Información de contacto -->
+        <div>
+          <h2 class="text-xl font-semibold mb-6">Información de contacto</h2>
+          <div class="space-y-4">
+            <div class="flex items-center">
+              <div class="text-2xl mr-4">📍</div>
+              <div>
+                <h3 class="font-medium">Dirección</h3>
+                <p class="text-gray-600">Calle de los Libros, 123<br>28001 Madrid, España</p>
+              </div>
+            </div>
+            <div class="flex items-center">
+              <div class="text-2xl mr-4">📞</div>
+              <div>
+                <h3 class="font-medium">Teléfono</h3>
+                <p class="text-gray-600">+34 91 234 5678</p>
+              </div>
+            </div>
+            <div class="flex items-center">
+              <div class="text-2xl mr-4">✉️</div>
+              <div>
+                <h3 class="font-medium">Email</h3>
+                <p class="text-gray-600">info@librosonline.com</p>
+              </div>
+            </div>
+            <div class="flex items-center">
+              <div class="text-2xl mr-4">🕒</div>
+              <div>
+                <h3 class="font-medium">Horario</h3>
+                <p class="text-gray-600">Lunes a Viernes: 9:00 - 18:00<br>Sábados: 10:00 - 14:00</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

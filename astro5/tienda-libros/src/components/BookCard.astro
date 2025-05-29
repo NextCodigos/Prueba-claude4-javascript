@@ -1,0 +1,28 @@
+---
+export interface Props {
+  title: string;
+  author: string;
+  price: number;
+  image: string;
+  category: string;
+}
+
+const { title, author, price, image, category } = Astro.props;
+---
+
+<div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+  <img src={image} alt={title} class="w-full h-48 object-cover" />
+  <div class="p-4">
+    <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full mb-2">
+      {category}
+    </span>
+    <h3 class="text-lg font-semibold text-gray-900 mb-1">{title}</h3>
+    <p class="text-gray-600 mb-2">{author}</p>
+    <div class="flex justify-between items-center">
+      <span class="text-xl font-bold text-blue-600">${price}</span>
+      <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors">
+        Añadir al carrito
+      </button>
+    </div>
+  </div>
+</div>
